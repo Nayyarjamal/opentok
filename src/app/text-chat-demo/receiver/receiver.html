@@ -1,0 +1,34 @@
+<div class="ui-g" *ngFor="let user of userList">
+    <p style="padding:30px 30px 0; font-size:22px; text-transform:capitalize" *ngIf="id == user.id">heyyy {{user.name}}!! You are online</p>
+</div>
+
+<div class="ui-g" style="padding:30px;">
+    <div class="ui-g-12" style="border: 2px solid #cccccc;">
+        <div class="ui-g-6">
+            <p *ngFor="let user of userList">
+                <span *ngIf="id == user.id">{{user.name}}</span>
+            </p>
+        </div>
+    </div>
+    <div class="ui-g-12" style="border: 2px solid #cccccc;height: 300px;overflow-y: auto;">
+        <div id="history"></div>
+    </div>
+    <div class="ui-g-12" style="border: 2px solid #cccccc;padding: 0;">
+        <form [formGroup]="receiverForm">
+            <div class="ui-g-10">
+                <input pInputText type="text" formControlName="message" placeholder="Type Something" autocomplete="on">
+            </div>
+            <div class="ui-g-2">
+                <button [disabled]='!receiverForm.valid' style="background: #3ba75d; color:white; border:none" pButton label="Send" type="submit"
+                    (click)="sendMessage(receiverForm.value)"></button>
+            </div>
+        </form>
+    </div>
+    <div class="ui-g-12">
+        <input type="file" style="color: transparent; width: 100px;" (change)="fileChangeEvent($event)" fileChangeEvent name="photo"
+            id="upload-photo" />
+        <span *ngIf="imageFlag==0" class="no_file_chosen">No file chosen</span>
+        <span *ngIf="imageFlag==1" class="no_file_chosen">{{imageName}}</span>
+        <button style="background: #3ba75d; width: 26%; color:white; border:none" pButton label="Send" type="button" (click)="sendFile(message)"></button>
+    </div>
+</div>
